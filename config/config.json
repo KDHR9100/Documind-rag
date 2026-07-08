@@ -1,0 +1,30 @@
+{
+  "model_config": {
+    "llm": {
+      "provider": "qwen",
+      "model": "qwen3.6-flash",
+      "temperature": 0.5,
+      "max_tokens": 2500
+    },
+    "embedding": {
+      "provider": "huggingface",
+      "model": "BAAI/bge-large-zh",
+      "device": "cpu",
+      "normalize_embeddings": true
+    }
+  },
+  "rag_config": {
+    "chunk_size": 1000,
+    "chunk_overlap": 150,
+    "top_k": 10,
+    "rerank_top_n": 3,
+    "rerank_model": "BAAI/bge-reranker-v2-m3",
+    "vector_store_type": "chroma",
+    "persist_directory": "./vector_store",
+    "separators": ["\n\n", "\n", "。", "！", "？", "；", " ", ""]
+  },
+  "paths": {
+    "docs": "./docs",
+    "vector_store": "./vector_store"
+  }
+}

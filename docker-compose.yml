@@ -1,0 +1,24 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  rag-api:
+    build: .
+    container_name: documind-rag
+    ports:
+      - "8000:8000"
+    environment:
+      # 【知识点】：通过环境变量注入 API Key（不写在镜像里）
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+    volumes:
+      # 【知识点】：挂载持久化目录，避免容器重启后丢失向量库
+      - ./vector_store:/app/vector_store
+      - ./docs:/app/docs
+      # 挂载配置文件便于热更新（修改 config.json 后无需 rebuild 镜像）
+      - ./config:/app/config
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

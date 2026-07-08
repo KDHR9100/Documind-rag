@@ -30,7 +30,10 @@ dev = [
 ]
 
 [tool.uv]
-dev-dependencies = [
+resolver-version = 2
+
+[dependency-groups]
+dev = [
     "pytest>=8.0.0",
 ]
 

@@ -49,3 +49,4 @@ test_*.py
 
 # ChromaDB
 *.db
+test_vector_store/
